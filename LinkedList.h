@@ -37,7 +37,7 @@
 
 
 // Console
-- (void) printList;
+- (void) printList:(const struct Node*)nodePtr;
 - (void) printCurrent;
 
 

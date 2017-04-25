@@ -60,19 +60,10 @@
 
 // Console
 
-- (void) printList {
-    if (self.headPtr != nil) {
-        
-        struct Node* iterator = self.headPtr;
-        NSInteger count = 0;
-        
-        while (count < self.numItems) {
-            printf("%li ",(long)iterator->data);
-            iterator = iterator->nextNode;
-            count++;
-        }
-        
-        printf("\n");
+- (void) printList:(const struct Node *)nodePtr {
+    printf("%li",nodePtr->data);
+    if (nodePtr->nextNode != nil) {
+        [self printList:nodePtr->nextNode];
     }
 }
 
@@ -300,6 +291,7 @@
     
     self.sortedDescending = true;
 }
+
 
 - (BOOL) searchForValue:(NSInteger) searchValue {
     struct Node* iterator = self.headPtr;

@@ -70,9 +70,10 @@ void testConstructors() {
     
     printf("\nPrint Lists\n");
     printf("intList1: ");
-    [intList1 printList];
+    [intList1 printList:intList1.headPtr];
+    printf("\n");
     printf("intList2: ");
-    [intList2 printList];
+    [intList2 printList:intList2.headPtr];
     
     printf("\n\nTEST PASSED\n");
 }
@@ -85,10 +86,12 @@ void reverseListTest() {
     setRandomList(testList, 10);
     
     printf("Original List: ");
-    [testList printList];
+    [testList printList:testList.headPtr];
     [testList reverse];
+    printf("\n");
     printf("Reversed List: ");
-    [testList printList];
+    [testList printList:testList.headPtr];
+    printf("\n");
     
 }
 
@@ -107,7 +110,8 @@ void searchElementTest() {
     [searchTestList attach:12];
     
     printf("\nTarget List: ");
-    [searchTestList printList];
+    [searchTestList printList:searchTestList.headPtr];
+    printf("\n");
     
     printf("\nSearch List for 6 \n");
     

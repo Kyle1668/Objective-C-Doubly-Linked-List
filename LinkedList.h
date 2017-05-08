@@ -37,6 +37,7 @@
 
 
 // Console
+- (void) printList;
 - (void) printList:(const struct Node*)nodePtr;
 - (void) printCurrent;
 
@@ -49,8 +50,9 @@
 - (void) attach:(const NSInteger) inData;
 - (void) pushBack:(const NSInteger) inData;
 - (void) pushFront:(const NSInteger) inData;
-- (void) attachBefore:(const NSInteger) inData;
 - (void) setFirstNode:(const NSInteger) inData;
+- (void) attachBeforeCurrent:(const NSInteger) inData;
+- (void) attachBefore:(struct Node*) nodePtr andInt:(const NSInteger) inData;
 
 
 // Operations

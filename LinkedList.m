@@ -35,9 +35,11 @@
 
 
 - (void) advance {
+    
     if (self.currentNode != self.tailPtr && self.currentNode != nil) {
         self.currentNode = self.currentNode->nextNode;
     }
+    
 }
 
 
@@ -60,11 +62,21 @@
 
 // Console
 
+- (void) printList {
+    if (!self.isEmptyList) {
+        [self printList:self.headPtr];
+    }
+}
+
+
 - (void) printList:(const struct Node *)nodePtr {
-    printf("%li",nodePtr->data);
+    
+    printf("%li ",nodePtr->data);
+    
     if (nodePtr->nextNode != nil) {
         [self printList:nodePtr->nextNode];
     }
+    
 }
 
 
@@ -199,17 +211,37 @@
 }
 
 
-- (void) attachBefore:(NSInteger) inData {
+- (void) setFirstNode:(NSInteger) inData {
+    
+    struct Node* newNode = malloc(sizeof(struct Node));
+    newNode->data = inData;
+    newNode->previousNode = nil;
+    newNode->nextNode = nil;
+    
+    self.headPtr = newNode;
+    self.tailPtr = newNode;
+    self.currentNode = newNode;
+    self.numItems++;
+    
+}
+
+
+- (void) attachBeforeCurrent:(const NSInteger)inData {
+    [self attachBefore:self.currentNode andInt:inData];
+}
+
+
+- (void) attachBefore:(struct Node *)nodePtr andInt:(const NSInteger)inData {
     
     struct Node* newNode = malloc(sizeof(struct Node));
     newNode->data = inData;
     
-    if (self.currentNode == self.headPtr) {
+    if (nodePtr == self.headPtr) {
         newNode->nextNode = self.headPtr;
         newNode->previousNode = nil;
         self.headPtr = newNode;
     }
-    else if (self.currentNode == self.tailPtr) {
+    else if (nodePtr == self.tailPtr) {
         newNode->nextNode = self.tailPtr;
         newNode->previousNode = self.tailPtr->previousNode;
         self.tailPtr->previousNode->nextNode = newNode;
@@ -221,21 +253,6 @@
         self.currentNode->previousNode = newNode;
     }
     
-    self.currentNode = newNode;
-    self.numItems++;
-    
-}
-
-
-- (void) setFirstNode:(NSInteger) inData {
-    
-    struct Node* newNode = malloc(sizeof(struct Node));
-    newNode->data = inData;
-    newNode->previousNode = nil;
-    newNode->nextNode = nil;
-    
-    self.headPtr = newNode;
-    self.tailPtr = newNode;
     self.currentNode = newNode;
     self.numItems++;
     
@@ -272,10 +289,11 @@
     }
     
     else {
-        // Quick Sort
+        // Insertion
     }
     
     self.sortedAscending = true;
+    
 }
 
 
@@ -294,6 +312,7 @@
 
 
 - (BOOL) searchForValue:(NSInteger) searchValue {
+    
     struct Node* iterator = self.headPtr;
     
     while (iterator != self.tailPtr->nextNode) {
@@ -306,6 +325,7 @@
     }
     
     return  false;
+    
 }
 
 
@@ -322,6 +342,7 @@
         }
         
         while (self.numItems != otherList.numItems + SIZE) {
+            
             if (iterator == otherList.headPtr && self.headPtr == nil) {
                 self.headPtr = newNode;
             }
@@ -339,6 +360,7 @@
             }
             
             self.numItems++;
+            
         }
         
         self.currentNode = self.tailPtr;

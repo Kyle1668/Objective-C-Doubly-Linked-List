@@ -258,6 +258,65 @@
     
 }
 
+// Sorting
+
+- (void) sort {
+    struct Node* iterator;
+    bool swapped;
+    
+    if (self.numItems != 0) {
+        while (swapped == true) {
+            swapped = false;
+            
+            for (iterator = self.headPtr; iterator != self.tailPtr; iterator = iterator->nextNode) {
+                if (iterator->data > iterator->nextNode->data) {
+                    [self swap:iterator andRight:iterator->nextNode];
+                    swapped = true;
+                }
+            }
+            
+        }
+    }
+}
+
+
+- (void) swap:(struct Node*) left andRight:(struct Node* ) right {
+    NSInteger temp = left->data;
+    left->data = right->data;
+    right->data = temp;
+}
+
+
+- (void) sortAscending {
+    
+    if (self.sortedDescending) {
+        [self reverse];
+        self.sortedDescending = false;
+    }
+    
+    else {
+        [self sort];
+    }
+    
+    self.sortedAscending = true;
+    
+}
+
+
+- (void) sortDescending {
+    
+    if (self.sortedAscending) {
+        [self reverse];
+        self.sortedAscending = false;
+    }
+    else {
+        [self sort];
+        [self reverse];
+    }
+    
+    self.sortedDescending = true;
+}
+
 
 // Operations
 
@@ -278,36 +337,6 @@
         count++;
     }
     
-}
-
-
-- (void) sortAscending {
-    
-    if (self.sortedDescending) {
-        [self reverse];
-        self.sortedDescending = false;
-    }
-    
-    else {
-        // Insertion
-    }
-    
-    self.sortedAscending = true;
-    
-}
-
-
-- (void) sortDescending {
-    
-    if (self.sortedAscending) {
-        [self reverse];
-        self.sortedAscending = false;
-    }
-    else {
-        // Quick Sort
-    }
-    
-    self.sortedDescending = true;
 }
 
 

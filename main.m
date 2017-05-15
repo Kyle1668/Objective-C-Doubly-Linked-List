@@ -5,6 +5,7 @@
 
 
 void setRandomList(LinkedList*, int);
+void mergeSortTest();
 void testConstructors();
 void reverseListTest();
 void searchElementTest();
@@ -13,9 +14,22 @@ void searchElementTest();
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        testConstructors();
-        reverseListTest();
-        searchElementTest();
+//        testConstructors();
+//        reverseListTest();
+//        searchElementTest();
+        
+        
+        LinkedList* testList = [[LinkedList alloc]init];
+        
+        setRandomList(testList, 12);
+        
+        [testList printList];
+        
+        [testList sortAscending];
+        
+        printf("\n");
+        
+        [testList printList];
         
         
     }
@@ -33,7 +47,6 @@ void setRandomList(LinkedList* inList, int numItems) {
         [inList attach:rand() % 50];
     }
 }
-
 
 void testConstructors() {
     printf("\n------------------------------------------------------");

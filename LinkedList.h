@@ -55,10 +55,14 @@
 - (void) attachBefore:(struct Node*) nodePtr andInt:(const NSInteger) inData;
 
 
-// Operations
-- (void) reverse;
+// Sorting
+- (void) sort;
 - (void) sortAscending;
 - (void) sortDescending;
+- (void) swap:(struct Node*) left andRight:(struct Node* ) right andOrder:(bool) order;
+
+// Operations
+- (void) reverse;
 - (BOOL) searchForValue:(NSInteger) searchValue;
 - (void) attachList:(const LinkedList*) otherList;
 
